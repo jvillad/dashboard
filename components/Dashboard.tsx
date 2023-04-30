@@ -1,13 +1,23 @@
-// Default session TYPE
-import { DefaultSession } from 'next-auth';
-import SideNav from './SideNav';
+'use client';
+import { useSession } from 'next-auth/react';
 
-const Dashboard = ({ user }: { user: DefaultSession['user'] }) => {
+const Dashboard = () => {
+  const session = useSession();
+  // TODO: modify names that are all caps as well
+  let words = session?.data?.user?.name?.split(' ');
+  if (words) {
+    words = words?.map((word) => word[0].toUpperCase() + word.substring(1));
+  }
+  const titleCaseName = words?.join(' ');
+  console.log(titleCaseName);
+
   return (
-    <div className="min-h-screen flex bg-[#171918]">
-      <SideNav user={user} />
-      <div className="bg-slate-100 flex-grow rounded-md my-4 mr-4">
-        <div className="p-5">test</div>
+    <div>
+      <div className="p-5">
+        <p>
+          👋🏼 Hello there,
+          <span className="text-gray-800 font-bold"> {titleCaseName}</span>
+        </p>
       </div>
     </div>
   );
