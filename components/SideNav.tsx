@@ -1,10 +1,15 @@
+'use client';
 import Link from 'next/link';
 import { DefaultSession } from 'next-auth';
 import { signOut } from 'next-auth/react';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
   const inactiveLink = 'flex items-center gap-3 py-3 px-4 rounded-l-lg';
   const activeLink = `${inactiveLink} bg-slate-100 text-[#171918] font-bold`;
+
+  const pathName = usePathname();
 
   return (
     <div className="relative">
@@ -14,8 +19,11 @@ const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
             The Brew Machina
           </div>
         </Link>
-        <nav className="flex flex-col gap-3 mt-10">
-          <Link href={'/'} className={activeLink}>
+        <nav className="flex flex-col gap-3 mt-10 abs">
+          <Link
+            href={'/'}
+            className={pathName === '/' ? activeLink : inactiveLink}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -32,7 +40,13 @@ const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
             </svg>
             Dashboard
           </Link>
-          <Link href={'/Pproducts'} className={inactiveLink}>
+
+          <Link
+            href={'/products'}
+            className={
+              pathName?.includes('/products') ? activeLink : inactiveLink
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -49,7 +63,12 @@ const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
             </svg>
             Products
           </Link>
-          <Link href={'/orders'} className={inactiveLink}>
+          <Link
+            href={'/orders'}
+            className={
+              pathName?.includes('/orders') ? activeLink : inactiveLink
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -60,7 +79,12 @@ const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
             </svg>
             Orders
           </Link>
-          <Link href={'/settings'} className={inactiveLink}>
+          <Link
+            href={'/settings'}
+            className={
+              pathName?.includes('/settings') ? activeLink : inactiveLink
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -75,17 +99,23 @@ const SideNav = ({ user }: { user: DefaultSession['user'] }) => {
         </nav>
         <div className="absolute inset-x-5 bottom-20">
           <div className="flex flex-col gap-4 text-center">
-            <div>
+            <div className="flex items-center gap-3 py-3 px-3">
+              <Image
+                src={user?.image ?? ''}
+                alt={user?.name ?? ''}
+                width={30}
+                height={30}
+                className="rounded-xl"
+              />
               <p>
-                👋🏼 Hello there
-                <span className="block text-green-500">{user?.name}</span>
+                <span className=" text-green-500">{user?.name}</span>
               </p>
             </div>
             <div>
               <button
                 onClick={() => signOut()}
                 type="button"
-                className="inline-block rounded-full bg-neutral-50 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#cbcbcb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(251,251,251,0.3)] dark:hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)]"
+                className="inline-block rounded-full bg-neutral-50 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#cbcbcb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(251,251,251,0.3)] dark:hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] w-[160px]"
               >
                 Sign Out
               </button>
