@@ -1,3 +1,12 @@
+# Brew Machina
+- Goated coffee shop dashboard. Based from my other project which is an .Net Core MVC app.
+
+## Stack
+- NextJS (using app Directory)
+- Prisma
+- PSQL
+- Tailwind
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
