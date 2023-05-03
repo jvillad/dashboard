@@ -1,23 +1,59 @@
+import DisplayProduct from '@/components/DisplayProduct';
 import Layout from '@/components/Layout';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 
 const Products = async () => {
-  const prisma = new PrismaClient();
-  const products = await prisma.item.findMany();
+  let products;
+  try {
+    products = await prisma.item.findMany();
+    if (products.length === 0) {
+      console.log('No item found');
+    } else {
+      console.log(`Found ${products.length} products:`);
+    }
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await prisma.$disconnect();
+  }
 
   return (
     <Layout>
-      <Link
-        href={'/products/add'}
-        type="button"
-        className="rounded-full bg-blue-700 py-2 px-4 text-white font-light"
-      >
-        Add Item
-      </Link>
-      {products?.map((item) => (
-        <p key={item.id}>{item.name}</p>
-      ))}
+      <div className="text-end py-5">
+        <Link
+          href={'/products/add'}
+          type="button"
+          className="rounded-md border-green-500 border-[1px] bg-[#171918] hover:bg-white hover:text-[#171918] hover:border-[#171918] hover:border-[1px] py-2 px-4 text-white font-light mb-4"
+        >
+          Add Item
+        </Link>
+      </div>
+      <div className="relative overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-white uppercase bg-[#171918]">
+            <tr className="rounded-xl">
+              <td>Name</td>
+              <td>Description</td>
+              <td>Price</td>
+              <td>Stock</td>
+              <td>Category</td>
+              <td>Special</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            {products?.map((product) => (
+              <tr
+                key={product.id}
+                className=" border-b text-[#171918] dark:border-gray-400"
+              >
+                <DisplayProduct product={product} />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Layout>
   );
 };
