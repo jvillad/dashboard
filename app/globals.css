@@ -8,3 +8,10 @@ textarea,
 select {
   @apply border-[1px] border-green-900 rounded-md py-2 px-3 focus:outline-none focus:border-green-800 focus:ring-1 focus:ring-green-800 focus:border-[1px] w-1/2 text-[#171918] text-sm;
 }
+table {
+  @apply rounded-sm;
+}
+
+table tr td {
+  @apply border p-3;
+}
