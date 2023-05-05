@@ -1,20 +1,27 @@
-import EditItem from '@/components/EditItem';
+import EditItem from '@/components/product/EditProduct';
 import Layout from '@/components/Layout';
 import prisma from '@/lib/prisma';
-import { ProductId } from '@/types/ItemProps';
+import { ItemDetails, ProductId } from '@/types/ItemProps';
 
 const page = async ({ params }: ProductId) => {
   const productDetail = await prisma.item.findUnique({
     where: {
-      id: `${params.productId}`,
+      id: Number(params.productId),
     },
   });
   if (productDetail === null) return;
 
+  const categories = await prisma.category.findMany();
+  if (categories.length === 0) return;
+
+  const data = {
+    ...productDetail,
+    categories,
+  };
   return (
     <Layout>
       <>
-        <EditItem product={productDetail} />
+        <EditItem product={data} />
       </>
     </Layout>
   );

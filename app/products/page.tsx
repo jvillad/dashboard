@@ -1,4 +1,4 @@
-import DisplayProduct from '@/components/DisplayProduct';
+import DisplayProduct from '@/components/product/DisplayProduct';
 import Layout from '@/components/Layout';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
