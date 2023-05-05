@@ -10,26 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Category {
+  name              String    @id
+  description       String
+  item              Item[]
+}
+
 model Item {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-  price       String
-  stock       String
-  category    String
-  special     Boolean @default(false)
+  id                Int       @id @default(autoincrement())
+  name              String
+  longDescription   String
+  shortDescription  String
+  price             Int
+  stock             String
+  special           Boolean   @default(false)
+  categoryId        String   
+  category          Category  @relation(fields: [categoryId], references: [name])
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String?  @unique
-  image     String?
-  role      Role     @default(USER)
-}
 
-enum Role {
-  USER
-  ADMIN
-}
