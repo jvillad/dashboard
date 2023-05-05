@@ -5,20 +5,35 @@ export default async function createItem(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, name, description, price, stock, category, special } = req.body;
+  const {
+    id,
+    name,
+    shortDescription,
+    longDescription,
+    price,
+    stock,
+    categoryId,
+    special,
+  } = req.body;
+
   if (req.method === 'PUT') {
     try {
       const data = await prisma.item.update({
         where: {
-          id: `${id}`,
+          id: id,
         },
         data: {
           name,
-          description,
+          shortDescription,
+          longDescription,
           price,
           stock,
-          category,
           special,
+          category: {
+            connect: {
+              name: categoryId,
+            },
+          },
         },
       });
       return res.status(200).json(data);
