@@ -1,22 +1,25 @@
 export type ItemProps = {
   id: string;
   name: string;
-  description: string;
-  price: string;
-  stock: string;
-  category: string;
+  longDescription: string;
+  shortDescription: string;
+  price: number;
+  stock: number;
   special: boolean;
+  categoryId: number;
+  category: string[];
 };
 
 export interface Product {
   product: {
-    id: string;
+    id: number;
     name: string;
-    description: string | null;
-    price: string;
+    longDescription: string;
+    shortDescription: string;
+    price: number;
     stock: string;
-    category: string;
     special: boolean;
+    categoryId: string;
   };
 }
 
@@ -24,16 +27,47 @@ export interface EditItemProps {
   product: {
     id: string;
     name: string;
-    description: string;
-    price: string;
-    stock: string;
-    category: string;
+    longDescription: string;
+    shortDescription: string;
+    price: number;
+    stock: number;
     special: boolean;
+    categoryId: number;
   };
 }
 
 export interface ProductId {
   params: {
-    productId: string;
+    productId: number;
+  };
+}
+
+export interface Category {
+  category: {
+    name: string;
+    description: string;
+  };
+}
+export interface ICategory {
+  categories: {
+    name: string;
+    description: string;
+  }[];
+}
+
+export interface ItemDetails {
+  product: {
+    id: number;
+    name: string;
+    longDescription: string;
+    shortDescription: string;
+    price: number;
+    stock: string;
+    special: boolean;
+    categoryId: string;
+    categories: {
+      name: string;
+      description: string;
+    }[];
   };
 }
