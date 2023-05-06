@@ -31,8 +31,9 @@ export default async function createItem(
           },
         },
       });
+      console.log(data);
 
-      return res.status(200).json('post');
+      return res.status(200).json(data);
     } catch (error) {
       console.error(error);
     }
