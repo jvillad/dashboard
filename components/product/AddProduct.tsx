@@ -18,6 +18,7 @@ const AddItem = ({ categories }: ICategory) => {
   const [stock, setStock] = useState<string>('');
   const [categoryId, setCategoryId] = useState<string>('');
   const [special, setSpecial] = useState<boolean>(false);
+  const [imageSrc, setImageSrc] = useState<string>('');
 
   const saveItem = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -32,10 +33,9 @@ const AddItem = ({ categories }: ICategory) => {
       special,
     };
 
-    console.log(itemDetails);
-
+    let itemId;
     // make a post to db and create an endpoint
-    await fetch('/api/createItem', {
+    const data = await fetch('/api/createItem', {
       method: 'POST',
       body: JSON.stringify(itemDetails),
       headers: {
@@ -43,11 +43,35 @@ const AddItem = ({ categories }: ICategory) => {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => (itemId = data.id))
       .catch((error) => console.error(error));
 
-    router.refresh();
-    router.push('/products');
+    router.push(`/products/uploadImage/${itemId}`);
+  };
+
+  // triggers when the file input changes
+  const uploadImages = async (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(ev.target?.files || []);
+    console.log(files);
+    if (files.length !== 0) {
+      const formData = new FormData();
+      for (const file of files) {
+        formData.append('file', file);
+      }
+
+      formData.append('upload_preset', 'dashboard-product-img');
+
+      const data = await fetch(
+        'https://api.cloudinary.com/v1_1/supremevillad/image/upload',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      ).then((r) => r.json());
+      if (data) {
+        setImageSrc(data.secure_url);
+      }
+    }
   };
 
   return (
@@ -55,6 +79,30 @@ const AddItem = ({ categories }: ICategory) => {
       <form className="text-center w-full" onSubmit={saveItem}>
         <div className="text-2xl mb-4 p-1 text-green-950">
           <h1>New Product</h1>
+        </div>
+        <label className="p-1">Photos</label>
+        <div className="mb-4">
+          <label className="w-40 h-36 bg-gray-200 rounded-xl flex justify-center items-center gap-2 hover:cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-upload"
+              viewBox="0 0 16 16"
+            >
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+            </svg>
+            Upload Image
+            <input
+              type="file"
+              name="file"
+              multiple={true}
+              className="hidden"
+              onChange={uploadImages}
+            />
+          </label>
         </div>
         <div className="mb-4">
           <input
@@ -123,7 +171,7 @@ const AddItem = ({ categories }: ICategory) => {
             type="submit"
             className="rounded-full bg-blue-500 py-[7px] px-6 text-white font-light"
           >
-            Add Item
+            Next
           </button>
         </div>
       </form>
