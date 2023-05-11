@@ -26,15 +26,16 @@ model Item {
   special           Boolean   @default(false)
   categoryId        String   
   category          Category  @relation(fields: [categoryId], references: [name])
-  imageUrls         Image[]
+  imageUrls         String[]
 }
 
-model Image {
-  id                Int       @id @default(autoincrement())
-  url               String
-  itemId            Int
-  item              Item      @relation(fields: [itemId], references: [id])
-}
+// -- Temp: Doing a testing to Item table. Removing relation until Item is final.
+// model Image {
+//   id                Int       @id @default(autoincrement())
+//   url               String
+//   itemId            Int       
+//   item              Item      @relation(fields: [itemId], references: [id])
+// }
 
 
 
