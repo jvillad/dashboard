@@ -1,5 +1,6 @@
 import { DisplayImagesProps } from '@/types/Interfaces';
 import Image from 'next/image';
+import React from 'react';
 
 const DisplayImages = (imgs: DisplayImagesProps) => {
   return (
@@ -18,4 +19,5 @@ const DisplayImages = (imgs: DisplayImagesProps) => {
   );
 };
 
-export default DisplayImages;
+// used react memo instead of useEffect to avoid unnecessary re-renders.
+export default React.memo(DisplayImages);

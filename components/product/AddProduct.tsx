@@ -1,11 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
 import { ICategory } from '@/types/Interfaces';
+import UploadImage from '../UploadImage';
+import DisplayImages from '../DisplayImages';
 
 const AddItem = ({ categories }: ICategory) => {
-  // TODO: Image URL
   // TODO: PROMO DURATION
   // TODO: Confirmation that item is added (Priority)
   const router = useRouter();
@@ -16,6 +17,8 @@ const AddItem = ({ categories }: ICategory) => {
   const [stock, setStock] = useState<string>('');
   const [categoryId, setCategoryId] = useState<string>('');
   const [special, setSpecial] = useState<boolean>(false);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const saveItem = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -28,6 +31,7 @@ const AddItem = ({ categories }: ICategory) => {
       stock: price.toString(),
       categoryId,
       special,
+      imageUrls,
     };
 
     let itemId;
@@ -42,16 +46,26 @@ const AddItem = ({ categories }: ICategory) => {
       .then((response) => response.json())
       .then((data) => (itemId = data.id))
       .catch((error) => console.error(error));
-
-    router.push(`/products/uploadImage/${itemId}`);
+    router.refresh();
+    router.push(`/products/`);
   };
 
   return (
     <section>
+      <div className="text-2xl mb-4 p-1 text-green-950">
+        <h1>New Product</h1>
+      </div>
+      <div className="flex justify-center">
+        <UploadImage setIsLoading={setIsLoading} setImageUrls={setImageUrls} />
+      </div>
+      <div className="flex justify-center items-center gap-5">
+        {imageUrls.map((imgs) => (
+          <div key={imgs}>
+            <DisplayImages imgToPreview={imgs} />
+          </div>
+        ))}
+      </div>
       <form className="text-center w-full" onSubmit={saveItem}>
-        <div className="text-2xl mb-4 p-1 text-green-950">
-          <h1>New Product</h1>
-        </div>
         <div className="mb-4">
           <input
             placeholder="Item Name"
@@ -117,12 +131,16 @@ const AddItem = ({ categories }: ICategory) => {
         </div>
 
         <div>
-          <button
-            type="submit"
-            className="rounded-full bg-blue-500 py-[7px] px-6 text-white font-light"
-          >
-            Next
-          </button>
+          {isLoading ? (
+            <p>Uploading images...</p>
+          ) : (
+            <button
+              type="submit"
+              className="rounded-full bg-blue-500 py-[7px] px-6 text-white font-light"
+            >
+              Next
+            </button>
+          )}
         </div>
       </form>
     </section>

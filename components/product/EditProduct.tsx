@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
 import { ItemDetails } from '@/types/Interfaces';
-import Image from 'next/image';
 import UploadImage from '../UploadImage';
 import DisplayImages from '../DisplayImages';
 
@@ -56,33 +55,6 @@ const EditItem = ({ product }: ItemDetails) => {
     router.push('/products');
   };
 
-  // triggers when the file input changes
-  const uploadImages = async (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(ev.target?.files || []);
-
-    if (files.length !== 0) {
-      const formData = new FormData();
-      try {
-        for (const file of files) {
-          setIsLoading(true);
-          formData.append('file', file);
-          formData.append('upload_preset', 'dashboard-product-img');
-          const data = await fetch(
-            'https://api.cloudinary.com/v1_1/supremevillad/image/upload',
-            {
-              method: 'POST',
-              body: formData,
-            }
-          ).then((r) => r.json());
-          setImageUrls((prevUrls) => [...prevUrls, data.secure_url]);
-        }
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   return (
     <section>
       <UploadImage setIsLoading={setIsLoading} setImageUrls={setImageUrls} />
@@ -90,16 +62,6 @@ const EditItem = ({ product }: ItemDetails) => {
         {imageUrls.map((imgs) => (
           <div key={imgs}>
             <DisplayImages imgToPreview={imgs} />
-            {/* <Image
-              src={imgs}
-              alt="prev image"
-              width={225}
-              height={330}
-              style={{
-                width: 225,
-                height: 330,
-              }}
-            /> */}
           </div>
         ))}
       </div>
