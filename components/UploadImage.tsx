@@ -30,7 +30,6 @@ const UploadImage = (props: UploadImageProps) => {
 
   return (
     <>
-      <label className="p-1">Photos</label>
       <div className="mb-4">
         <label className="w-40 h-36 bg-gray-200 rounded-xl flex justify-center items-center gap-2 hover:cursor-pointer">
           <svg

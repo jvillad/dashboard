@@ -7,11 +7,6 @@ const Products = async () => {
   let products;
   try {
     products = await prisma.item.findMany();
-    if (products.length === 0) {
-      console.log('No item found');
-    } else {
-      console.log(`Found ${products.length} products:`);
-    }
   } catch (e) {
     console.error(e);
   } finally {
