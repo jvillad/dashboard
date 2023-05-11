@@ -75,7 +75,7 @@ export interface ItemDetails {
 }
 
 export interface DisplayImagesProps {
-  imgToPreview: string[];
+  imgToPreview: string;
 }
 
 export interface UploadImageProps {

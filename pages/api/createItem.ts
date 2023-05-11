@@ -13,6 +13,7 @@ export default async function createItem(
     stock,
     categoryId,
     special,
+    imageUrls,
   } = req.body;
   if (req.method === 'POST') {
     try {
@@ -29,6 +30,7 @@ export default async function createItem(
               name: categoryId,
             },
           },
+          imageUrls,
         },
       });
       console.log(data);

@@ -14,6 +14,7 @@ export default async function createItem(
     stock,
     categoryId,
     special,
+    imageUrls,
   } = req.body;
 
   if (req.method === 'PUT') {
@@ -34,11 +35,22 @@ export default async function createItem(
               name: categoryId,
             },
           },
+          imageUrls,
         },
       });
       return res.status(200).json(data);
     } catch (error) {
       return res.status(500).json(error);
     }
+    // try {
+    //   const data = await prisma.image.update({
+    //     where: {
+    //       itemId
+    //     }
+    //   })
+
+    // } catch (error) {
+    //   return res.status(500).json(error);
+    // }
   }
 }
