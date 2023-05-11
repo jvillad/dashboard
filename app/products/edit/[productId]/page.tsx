@@ -1,7 +1,7 @@
 import EditItem from '@/components/product/EditProduct';
 import Layout from '@/components/Layout';
 import prisma from '@/lib/prisma';
-import { ItemDetails, ProductId } from '@/types/ItemProps';
+import { ProductId } from '@/types/Interfaces';
 
 const page = async ({ params }: ProductId) => {
   const productDetail = await prisma.item.findUnique({

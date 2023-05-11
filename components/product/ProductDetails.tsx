@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@/types/ItemProps';
+import { Product } from '@/types/Interfaces';
 import Layout from '../Layout';
 import Link from 'next/link';
 

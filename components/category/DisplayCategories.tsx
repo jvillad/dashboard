@@ -1,4 +1,4 @@
-import { Category } from '@/types/ItemProps';
+import { Category } from '@/types/Interfaces';
 import Link from 'next/link';
 
 const DisplayProduct = ({ category }: Category) => {
