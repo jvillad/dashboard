@@ -11,22 +11,23 @@ datasource db {
 }
 
 model Category {
-  name              String    @id
-  description       String
-  item              Item[]
+  name        String @id
+  description String
+  item        Item[]
 }
 
 model Item {
-  id                Int       @id @default(autoincrement())
-  name              String
-  longDescription   String
-  shortDescription  String
-  price             Int
-  stock             String
-  special           Boolean   @default(false)
-  categoryId        String   
-  category          Category  @relation(fields: [categoryId], references: [name])
-  imageUrls         String[]
+  id               Int       @id @default(autoincrement())
+  name             String
+  longDescription  String
+  shortDescription String
+  price            Int
+  stock            String
+  special          Boolean   @default(false)
+  categoryId       String
+  category         Category? @relation(fields: [categoryId], references: [name])
+  imageUrls        String[]
+  productSize      ProductSize[]
 }
 
 // -- Temp: Doing a testing to Item table. Removing relation until Item is final.
@@ -37,5 +38,37 @@ model Item {
 //   item              Item      @relation(fields: [itemId], references: [id])
 // }
 
+model ProductSize {
+  id            Int        @id @default(autoincrement())
+  name          String
+  price         Int
+  productId     Int
+  product       Item    @relation(fields: [productId], references: [id])
+}
 
+// model Grind {
+//   id            Int        @id @default(autoincrement())
+//   name          String
+//   productId     Int
+//   product       Product    @relation(fields: [productId], references: [id])
+// }
 
+// model Order {
+//   id            Int        @id @default(autoincrement())
+//   customerName  String
+//   customerEmail String
+//   products      OrderedProduct[]
+//   total         Int
+//   createdAt     DateTime   @default(now())
+// }
+
+// model OrderedProduct {
+//   id            Int        @id @default(autoincrement())
+//   productId     Int
+//   product       Product    @relation(fields: [productId], references: [id])
+//   sizeId        Int
+//   size          ProductSize @relation(fields: [sizeId], references: [id])
+//   grindId       Int
+//   grind         Grind      @relation(fields: [grindId], references: [id])
+//   quantity      Int
+// }
