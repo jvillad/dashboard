@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function createItem(
+export default async function createCategory(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

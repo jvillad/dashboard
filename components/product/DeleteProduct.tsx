@@ -1,6 +1,5 @@
 'use client';
-import prisma from '@/lib/prisma';
-import { Product } from '@/types/Interfaces';
+import { Product } from '@/types/ProductInterface';
 import { useRouter } from 'next/navigation';
 
 const DeleteItem = ({ product }: Product) => {

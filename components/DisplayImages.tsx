@@ -1,4 +1,4 @@
-import { DisplayImagesProps } from '@/types/Interfaces';
+import { DisplayImagesProps } from '@/types/ImageProps';
 import Image from 'next/image';
 import React from 'react';
 

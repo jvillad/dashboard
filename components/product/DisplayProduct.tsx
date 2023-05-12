@@ -1,4 +1,4 @@
-import { Product } from '@/types/Interfaces';
+import { Product } from '@/types/ProductInterface';
 import Link from 'next/link';
 
 const DisplayProduct = ({ product }: Product) => {

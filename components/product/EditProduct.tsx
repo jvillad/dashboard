@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
-import { ItemDetails } from '@/types/Interfaces';
+import { ItemDetails } from '@/types/ProductInterface';
 import UploadImage from '../UploadImage';
 import DisplayImages from '../DisplayImages';
 

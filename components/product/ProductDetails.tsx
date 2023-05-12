@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@/types/Interfaces';
+import { Product } from '@/types/ProductInterface';
 import Layout from '../Layout';
 import Link from 'next/link';
 

@@ -1,6 +1,6 @@
 import ItemDetails from '@/components/product/ProductDetails';
 import prisma from '@/lib/prisma';
-import { ProductId } from '@/types/Interfaces';
+import { ProductId } from '@/types/ProductInterface';
 
 const page = async ({ params }: ProductId) => {
   const productDetail = await prisma.item.findUnique({

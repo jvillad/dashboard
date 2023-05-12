@@ -1,5 +1,5 @@
 'use client';
-import { UploadImageProps } from '@/types/Interfaces';
+import { UploadImageProps } from '@/types/ImageProps';
 
 const UploadImage = (props: UploadImageProps) => {
   const uploadImages = async (ev: React.ChangeEvent<HTMLInputElement>) => {

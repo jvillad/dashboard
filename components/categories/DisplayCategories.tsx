@@ -43,7 +43,7 @@ const DisplayProduct = ({ category }: Category) => {
             </div>
           </Link>
           <Link
-            href={`/products/delete/${category.name}`}
+            href={`/categories/delete/${category.name}`}
             className="p-2 bg-red-700 text-white border-solid border-red-700 border-[1px] rounded-md"
           >
             <div className="flex items-center gap-1 w-[100px] justify-center">

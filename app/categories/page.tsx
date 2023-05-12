@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import DisplayCategories from '@/components/category/DisplayCategories';
+import DisplayCategories from '@/components/categories/DisplayCategories';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 
