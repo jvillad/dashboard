@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
-import { ICategory } from '@/types/Interfaces';
+import { ICategory } from '@/types/CategoryInterface';
 import UploadImage from '../UploadImage';
 import DisplayImages from '../DisplayImages';
 
