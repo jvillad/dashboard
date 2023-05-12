@@ -43,19 +43,6 @@ export interface ProductId {
   };
 }
 
-export interface Category {
-  category: {
-    name: string;
-    description: string;
-  };
-}
-export interface ICategory {
-  categories: {
-    name: string;
-    description: string;
-  }[];
-}
-
 export interface ItemDetails {
   product: {
     id: number;
@@ -72,13 +59,4 @@ export interface ItemDetails {
     }[];
     imageUrls: string[];
   };
-}
-
-export interface DisplayImagesProps {
-  imgToPreview: string;
-}
-
-export interface UploadImageProps {
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>;
 }
