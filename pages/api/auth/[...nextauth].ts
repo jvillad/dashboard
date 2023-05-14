@@ -1,28 +1,20 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+export const adminIds = [`${process.env.ADMIN}`];
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
-    // // OAuth authentication providers...
-    // AppleProvider({
-    //   clientId: process.env.APPLE_ID,
-    //   clientSecret: process.env.APPLE_SECRET,
-    // }),
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_ID,
-    //   clientSecret: process.env.FACEBOOK_SECRET,
-    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
-    // Passwordless / email sign in
-    // EmailProvider({
-    //   server: process.env.MAIL_SERVER,
-    //   from: 'NextAuth.js <no-reply@example.com>',
-    // }),
   ],
-  // reuse an active connection to the database
-  // if no active connection creates a new connection (clientPromise)
-  // adapter: MongoDBAdapter(clientPromise),
-});
+  callbacks: {
+    async session({ session, user, token }: any) {
+      if (adminIds.includes(session.user?.email as string)) return session;
+      else return false;
+    },
+  },
+};
+
+export default NextAuth(authOptions);
