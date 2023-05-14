@@ -27,8 +27,9 @@ model Item {
   categoryId       String
   category         Category? @relation(fields: [categoryId], references: [name])
   imageUrls        String[]
-  productSize      ProductSize[]
+  sizes            String[]  @default(["250g", "500g", "1kg"])
 }
+
 
 // -- Temp: Doing a testing to Item table. Removing relation until Item is final.
 // model Image {
@@ -38,13 +39,6 @@ model Item {
 //   item              Item      @relation(fields: [itemId], references: [id])
 // }
 
-model ProductSize {
-  id            Int        @id @default(autoincrement())
-  name          String
-  price         Int
-  productId     Int
-  product       Item    @relation(fields: [productId], references: [id])
-}
 
 // model Grind {
 //   id            Int        @id @default(autoincrement())

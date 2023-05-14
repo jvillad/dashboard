@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 const DeleteItem = ({ category }: Category) => {
   const router = useRouter();
   const name: string = category.name;
+  console.log(name);
   const handleDelete = async () => {
     await fetch(`/api/category/deleteCategory?name=${category.name}`, {
       method: 'DELETE',
