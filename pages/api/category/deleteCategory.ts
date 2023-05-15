@@ -1,10 +1,13 @@
 import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { auth } from '../auth/auth';
 
 export default async function deleteCategory(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await auth(req, res);
+
   if (req.method === 'DELETE') {
     try {
       const deleteUser = await prisma.category.deleteMany({
