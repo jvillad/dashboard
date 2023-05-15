@@ -4,12 +4,6 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const DisplayProduct = ({ product }: Product) => {
-  const session = useSession();
-  console.log(session);
-  if (!adminIds.includes(session.data?.user?.email as string)) {
-    console.log('not authorized');
-    return;
-  }
   return (
     <>
       <td>

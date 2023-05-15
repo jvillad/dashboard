@@ -2,8 +2,16 @@ import DisplayProduct from '@/components/product/DisplayProduct';
 import Layout from '@/components/Layout';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { redirect } from 'next/navigation';
 
 const Products = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/unauthorized');
+  }
   let products;
   try {
     products = await prisma.item.findMany();

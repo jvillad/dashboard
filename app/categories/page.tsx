@@ -1,9 +1,16 @@
 import Layout from '@/components/Layout';
 import DisplayCategories from '@/components/categories/DisplayCategories';
 import prisma from '@/lib/prisma';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 const page = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/unauthorized');
+  }
   const categories = await prisma.category.findMany();
   if (categories.length === 0) {
     console.log('No categories found');
