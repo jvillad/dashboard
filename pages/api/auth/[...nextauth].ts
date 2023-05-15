@@ -11,8 +11,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, user, token }: any) {
-      if (adminIds.includes(session.user?.email as string)) return session;
-      else return false;
+      return session;
     },
   },
 };
