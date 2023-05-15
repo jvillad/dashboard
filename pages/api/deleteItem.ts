@@ -1,10 +1,13 @@
 import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { auth } from './auth/auth';
 
 export default async function createItem(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await auth(req, res);
+
   const id: number = Number(req.query.id) ?? 0;
   if (req.method === 'DELETE') {
     try {
