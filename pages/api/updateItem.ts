@@ -45,15 +45,5 @@ export default async function createItem(
     } catch (error) {
       return res.status(500).json(error);
     }
-    // try {
-    //   const data = await prisma.image.update({
-    //     where: {
-    //       itemId
-    //     }
-    //   })
-
-    // } catch (error) {
-    //   return res.status(500).json(error);
-    // }
   }
 }
