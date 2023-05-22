@@ -7,7 +7,7 @@ const DisplayProduct = ({ category }: Category) => {
       <td>
         <div className="flex justify-center items-center gap-2">
           {category.name}
-          <Link href={`/products/details/${category.name}`}>
+          <Link href={`/categories/details/${category.name}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
