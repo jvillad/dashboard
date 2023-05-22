@@ -3,7 +3,6 @@ import { Product } from '@/types/ProductInterface';
 import Layout from '../Layout';
 import Link from 'next/link';
 
-// TODO: update schema to add more details about the product
 const ItemDetails = ({ product }: Product) => {
   return (
     <Layout>

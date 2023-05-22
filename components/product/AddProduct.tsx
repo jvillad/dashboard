@@ -7,8 +7,6 @@ import UploadImage from '../UploadImage';
 import DisplayImages from '../DisplayImages';
 
 const AddItem = ({ categories }: ICategory) => {
-  // TODO: PROMO DURATION
-  // TODO: Confirmation that item is added (Priority)
   const router = useRouter();
   const [name, setName] = useState<string>('');
   const [shortDescription, setShortDescription] = useState<string>('');

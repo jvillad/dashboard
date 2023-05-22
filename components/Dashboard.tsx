@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 const Dashboard = (count: Counts) => {
   const session = useSession();
-  // TODO: modify names that are all caps as well
   let words = session?.data?.user?.name?.split(' ');
   if (words) {
     words = words?.map((word) => word[0].toUpperCase() + word.substring(1));
