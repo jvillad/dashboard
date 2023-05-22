@@ -23,7 +23,7 @@ const page = async () => {
         <Link
           href={'/categories/add'}
           type="button"
-          className="rounded-md border-green-500 border-[1px] bg-[#171918] hover:bg-white hover:text-[#171918] hover:border-[#171918] hover:border-[1px] py-2 px-4 text-white font-light mb-4"
+          className="rounded-md border-green-900 border-[1px] bg-[#171918] hover:bg-white hover:text-[#171918] hover:border-[#171918] hover:border-[1px] py-2 px-4 text-white font-light mb-4"
         >
           Add Category
         </Link>

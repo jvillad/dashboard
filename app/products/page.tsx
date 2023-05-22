@@ -27,7 +27,7 @@ const Products = async () => {
         <Link
           href={'/products/add'}
           type="button"
-          className="rounded-md border-green-500 border-[1px] bg-[#171918] hover:bg-white hover:text-[#171918] hover:border-[#171918] hover:border-[1px] py-2 px-4 text-white font-light mb-4"
+          className="rounded-md border-green-800 border-[1px] bg-[#171918] hover:bg-white hover:text-[#171918] hover:border-[#171918] hover:border-[1px] py-2 px-4 text-white font-light mb-4"
         >
           Add Item
         </Link>
